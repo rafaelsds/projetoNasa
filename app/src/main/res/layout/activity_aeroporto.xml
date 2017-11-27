@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.unesc.app.aviao.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:padding="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/aeroporto"
+                    android:background="@color/grey"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+
+                        <ImageView
+                            android:id="@+id/centro"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/centro"/>
+
+                </RelativeLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearFiltroInputs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/retangulo">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/search"
+                            android:layout_gravity="center"
+                            android:background="@null"/>
+
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:text="@string/adicionar_aviao"
+                            android:linksClickable="true"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearInputs"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:id="@+id/linearInputsCartesiano"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edtCoordenadaX"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_x"/>
+
+                            <EditText
+                                android:id="@+id/edtCoordenadaY"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_y"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearInputsPolar"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <EditText
+                                android:id="@+id/edtRaio"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/raio"/>
+
+                            <EditText
+                                android:id="@+id/edtAngulo"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/angulo"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <EditText
+                                android:id="@+id/edtVelocidade"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/velocidade"/>
+
+                            <EditText
+                                android:id="@+id/edtDirecao"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/direcao"/>
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnPosicionar"
+                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/adicionar"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearFiltroDataGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/retangulo">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/search"
+                            android:layout_gravity="center"
+                            android:background="@null"/>
+
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:text="@string/data_grid"
+                            android:linksClickable="true"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearFiltroTranslandar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/retangulo">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/search"
+                            android:layout_gravity="center"
+                            android:background="@null"/>
+
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:text="@string/translandar"
+                            android:linksClickable="true"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearTranslandar"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/edtTranslandarX"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_x"/>
+
+                            <EditText
+                                android:id="@+id/edtTranslandarY"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_y"/>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnTranslandar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/translandar"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                    android:id="@+id/linearFiltroEscalonar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/retangulo">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/search"
+                        android:layout_gravity="center"
+                        android:background="@null"/>
+
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:text="@string/escalonar"
+                        android:linksClickable="true"
+                        />
+                </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearEscalonar"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/edtEscalonarX"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_x"/>
+
+                            <EditText
+                                android:id="@+id/edtEscalonarY"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_y"/>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnEscalonar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/escalonar"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearFiltroRotacionar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/retangulo">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/search"
+                            android:layout_gravity="center"
+                            android:background="@null"/>
+
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:text="@string/rotacionar"
+                            android:linksClickable="true"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearRotacionar"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/edtRotacionarX"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_x"/>
+
+                            <EditText
+                                android:id="@+id/edtRotacionarY"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/informe_y"/>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnRotacionar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rotacionar"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearRemoverAvioes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/retangulo">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/search"
+                            android:layout_gravity="center"
+                            android:background="@null"/>
+
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:text="@string/remover_aviao"
+                            android:linksClickable="true"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+</LinearLayout>
