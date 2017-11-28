@@ -2,6 +2,7 @@
     <string name="app_name">Aviao</string>
     <string name="informe_x">Informe X</string>
     <string name="informe_y">Informe Y</string>
+    <string name="informe_angulo">Informe o angulo</string>
     <string name="raio">Raio</string>
     <string name="angulo">Angulo</string>
     <string name="velocidade">Velocidade</string>

@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity
     private LinearLayout linearFiltroRotacionar, linearRotacionar;
 
     private EditText edtCoordenadaX, edtCoordenadaY, edtRaio, edtAngulo, edtDirecao, edtTranslandarX, edtTranslandarY;
-    private EditText edtEscalonarX, edtEscalonarY, edtVelocidade, edtRotacionarX, edtRotacionarY;
+    private EditText edtEscalonarX, edtEscalonarY, edtVelocidade, edtRotacionarX, edtRotacionarY, edtRotacionarAngulo;
 
     private Button btnAdicionar, btnTranslandar, btnEscalonar, btnRotacionar;
     private ImageView desenhoAviao, centro;
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity
         edtVelocidade = (EditText)findViewById(R.id.edtVelocidade);
         edtRotacionarX = (EditText)findViewById(R.id.edtRotacionarX);
         edtRotacionarY = (EditText)findViewById(R.id.edtRotacionarY);
+        edtRotacionarAngulo = (EditText)findViewById(R.id.edtRotacionarAngulo);
         btnAdicionar = (Button)findViewById(R.id.btnPosicionar);
         btnTranslandar = (Button)findViewById(R.id.btnTranslandar);
         btnEscalonar = (Button)findViewById(R.id.btnEscalonar);
@@ -127,22 +128,37 @@ public class MainActivity extends AppCompatActivity
                 desenhoAviao.setImageResource(R.drawable.airplane);
 
                 Integer id = ++idAviao;
+                Float raio, angulo;
+
+
+                if(!edtRaio.getText().toString().isEmpty()){
+                    raio = obterCoordenadaDataGrid("R");
+                }else{
+                    raio = Float.parseFloat(String.valueOf(obterRaio(obterCoordenadaDataGrid("X"),obterCoordenadaDataGrid("Y"))));
+                }
+
+                if(!edtAngulo.getText().toString().isEmpty()){
+                    angulo = obterCoordenadaDataGrid("A");
+                }else{
+                    angulo = obterAngulo(obterCoordenadaDataGrid("X"),obterCoordenadaDataGrid("Y"));
+                }
+
 
                 Aviao a = new Aviao(id,obterCoordenadaCentro("X"),
                         obterCoordenadaCentro("Y"),
-                        obterCoordenadaCentro("A"),
+                        angulo,
                         obterCoordenadaCentro("D"),
                         obterCoordenadaCentro("V"),
-                        obterCoordenadaDataGrid("R"),
+                        raio,
                         desenhoAviao);
 
 
                 adapterCard.itemSet(id, obterCoordenadaDataGrid("X"),
                         obterCoordenadaDataGrid("Y"),
-                        obterCoordenadaDataGrid("A"),
+                        angulo,
                         obterCoordenadaDataGrid("D"),
                         obterCoordenadaDataGrid("V"),
-                        obterCoordenadaDataGrid("R"),
+                        raio,
                         desenhoAviao,
                         MainActivity.this);
 
@@ -297,7 +313,7 @@ public class MainActivity extends AppCompatActivity
 
                         }
                     }
-                    }
+                }
 
                 if(!cardChecado){
                     new SweetAlertDialog(MainActivity.this, SweetAlertDialog.ERROR_TYPE)
@@ -326,6 +342,15 @@ public class MainActivity extends AppCompatActivity
                             //Esconde filtros
                             linearRotacionar.setVisibility(View.GONE);
 
+                            adapterCard.rotacionar(Float.parseFloat(edtRotacionarX.getText().toString()),
+                                    Float.parseFloat(edtRotacionarY.getText().toString()),
+                                    Float.parseFloat(edtRotacionarAngulo.getText().toString()),
+                                    a.getId());
+
+                            rotacionar(Float.parseFloat(edtRotacionarX.getText().toString()),
+                                    Float.parseFloat(edtRotacionarY.getText().toString()),
+                                    Float.parseFloat(edtRotacionarAngulo.getText().toString()),
+                                    a.getId());
 
                         }
                     }
@@ -529,15 +554,8 @@ public class MainActivity extends AppCompatActivity
         for (int position=0; position < list.size(); position++){
             if (list.get(position).getId() == id) {
 
-                System.out.println("y atual "+(list.get(position).getY()*(-1)));
-                System.out.println("y param "+y);
-
-
                 y = ((list.get(position).getY()*(-1)) * (y/100f)) * (-1);
                 x = list.get(position).getX() * (x/100f);
-
-                System.out.println("novo y "+y);
-
 
                 Aviao a = new Aviao(id, Float.parseFloat(x.toString()), Float.parseFloat(y.toString()),
                         Float.parseFloat(String.valueOf(list.get(position).getA())),
@@ -555,6 +573,39 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+
+    public void rotacionar(Float xP, Float yP, Float anguloP, Integer id){
+
+        desenhoAviao = new ImageView(MainActivity.this);
+        desenhoAviao.setImageResource(R.drawable.airplane);
+
+        for (int position=0; position < list.size(); position++){
+            if (list.get(position).getId() == id) {
+
+                Double angulo  = anguloP / (180 / Math.PI);
+                Float x, y;
+
+                x = Float.parseFloat(String.valueOf((Math.cos(angulo) * xP))) - Float.parseFloat(String.valueOf(Math.sin(angulo) * yP));
+                y = Float.parseFloat(String.valueOf((Math.cos(angulo) * yP))) + Float.parseFloat(String.valueOf(Math.sin(angulo) * xP));
+
+                Aviao a = new Aviao(id, Float.parseFloat(x.toString()), Float.parseFloat(y.toString()),
+                        Float.parseFloat(String.valueOf(list.get(position).getA())),
+                        list.get(position).getD(),
+                        list.get(position).getV(),
+                        list.get(position).getR(),
+                        desenhoAviao);
+
+                aeroporto.removeView(list.get(position).getAviao());
+                list.remove(list.get(position));
+
+                adicionaAviaoAeroporto(a);
+                return;
+
+            }
+        }
+    }
+
 
     public Float obterCoordenadaCentro(String eixo){
         if(eixo.equals("X") && edtCoordenadaX.getText() != null && !edtCoordenadaX.getText().toString().isEmpty()) {
@@ -595,6 +646,53 @@ public class MainActivity extends AppCompatActivity
 
         return 0f;
 
+    }
+
+
+    public Double obterRaio(Float x, Float y){
+        return Math.sqrt((Math.pow(x, 2))+(Math.pow(y, 2)));
+    }
+
+
+    public Float obterAngulo(Float x, Float y){
+        Float resultAlfa2 = Float.parseFloat(String.valueOf(Math.atan(x/y))) * Float.parseFloat(String.valueOf(180f/Math.PI)) ;
+
+        if(x==0){
+            if(y==0){
+                resultAlfa2=0f;
+            }
+            if(y>0){
+                resultAlfa2=90f;
+            }if(y<0){
+                resultAlfa2=270f;
+            }
+        }
+        if(y==0){
+            if(x<0){
+                resultAlfa2=180f;
+            }if(x>0){
+                resultAlfa2=0f;
+            }
+        }
+
+
+        if(x>0){
+            if(y>0){
+                resultAlfa2=resultAlfa2;
+            }
+            if(y<0) {
+                resultAlfa2=360f+resultAlfa2;
+            }
+        }
+        if(x<0){
+            if(y>0){
+                resultAlfa2=180f+resultAlfa2;
+            }
+            if(y<0) {
+                resultAlfa2=180f+resultAlfa2;
+            }
+        }
+        return resultAlfa2;
     }
 
     public Float obterCoordenadaDataGrid(String eixo){

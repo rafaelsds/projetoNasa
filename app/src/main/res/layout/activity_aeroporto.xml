@@ -399,7 +399,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:textSize="25dp"
-                                android:hint="@string/informe_x"/>
+                                android:hint="@string/x"/>
 
                             <EditText
                                 android:id="@+id/edtRotacionarY"
@@ -409,7 +409,18 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:textSize="25dp"
-                                android:hint="@string/informe_y"/>
+                                android:hint="@string/y"/>
+
+                            <EditText
+                                android:id="@+id/edtRotacionarAngulo"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/angulo"/>
+
                         </LinearLayout>
 
                         <Button

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +44,16 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
         //myViewHoldersReference.add(myViewHolder);
         //myViewHolder.bind(myObject);
 
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.format(0.912385);
+
         myViewHolder.txtId.setText(myObject.getId().toString());
-        myViewHolder.txtA.setText(myObject.getA().toString());
-        myViewHolder.txtX.setText(myObject.getX().toString());
-        myViewHolder.txtY.setText(myObject.getY().toString());
-        myViewHolder.txtD.setText(myObject.getD().toString());
-        myViewHolder.txtV.setText(myObject.getV().toString());
+        myViewHolder.txtA.setText((myObject.getA()).toString());
+        myViewHolder.txtX.setText(df.format(myObject.getX()).toString());
+        myViewHolder.txtY.setText(df.format(myObject.getY()).toString());
+        myViewHolder.txtD.setText((myObject.getD()).toString());
+        myViewHolder.txtV.setText((myObject.getV()).toString());
+        myViewHolder.txtR.setText(df.format(myObject.getR()).toString());
 
         if(myObject.isChecado()){
             myViewHolder.ckSelect.setChecked(true);
@@ -85,6 +90,26 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
             }
         }
 
+    }
+
+
+    public void rotacionar(Float xP, Float yP,  Float anguloP, Integer id) {
+
+        for (int position=0; position < list.size(); position++){
+            if (list.get(position).getId() == id) {
+
+                Double angulo  = anguloP / (180 / Math.PI);
+                Float x, y;
+
+                x = Float.parseFloat(String.valueOf((Math.cos(angulo) * xP))) - Float.parseFloat(String.valueOf(Math.sin(angulo) * yP));
+                y = Float.parseFloat(String.valueOf((Math.cos(angulo) * yP))) + Float.parseFloat(String.valueOf(Math.sin(angulo) * xP));
+
+                list.get(position).setY(y);
+                list.get(position).setX(x);
+
+                return;
+            }
+        }
     }
 
     public List<Aviao> getList(){
