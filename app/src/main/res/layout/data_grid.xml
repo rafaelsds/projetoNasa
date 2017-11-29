@@ -17,61 +17,63 @@
             android:layout_height="match_parent">
             <TableRow>
                 <CheckBox
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
                     android:text="@string/id"
                     android:textSize="14dp"/>
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
                     android:text="@string/x"
                     android:textSize="14dp"/>
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
                     android:text="@string/y"
                     android:textSize="14dp"/>
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
                     android:text="@string/r"
                     android:textSize="14dp"/>
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
                     android:text="@string/a"
                     android:textSize="14dp"/>
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
                     android:text="@string/v"
                     android:textSize="14dp"/>
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
                     android:text="@string/d"
                     android:textSize="14dp"/>
             </TableRow>

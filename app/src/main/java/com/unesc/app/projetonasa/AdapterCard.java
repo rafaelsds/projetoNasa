@@ -48,7 +48,7 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
         df.format(0.912385);
 
         myViewHolder.txtId.setText(myObject.getId().toString());
-        myViewHolder.txtA.setText((myObject.getA()).toString());
+        myViewHolder.txtA.setText(df.format(myObject.getA()).toString());
         myViewHolder.txtX.setText(df.format(myObject.getX()).toString());
         myViewHolder.txtY.setText(df.format(myObject.getY()).toString());
         myViewHolder.txtD.setText((myObject.getD()).toString());
@@ -84,8 +84,10 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
     public void escalonar(Float x, Float y, Integer id) {
         for (int position = 0; position < list.size(); position++) {
             if (list.get(position).getId() == id) {
-                list.get(position).setY(list.get(position).getY() * (y / 100f));
-                list.get(position).setX(list.get(position).getX() * (x / 100f));
+//                list.get(position).setY(list.get(position).getY() * (y / 100f));
+//                list.get(position).setX(list.get(position).getX() * (x / 100f));
+                list.get(position).setY(list.get(position).getY() * y);
+                list.get(position).setX(list.get(position).getX() * x);
                 return;
             }
         }

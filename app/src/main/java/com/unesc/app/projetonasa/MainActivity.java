@@ -128,24 +128,28 @@ public class MainActivity extends AppCompatActivity
                 desenhoAviao.setImageResource(R.drawable.airplane);
 
                 Integer id = ++idAviao;
-                Float raio, angulo;
+                Float raio, angulo, x, y;
 
 
                 if(!edtRaio.getText().toString().isEmpty()){
                     raio = obterCoordenadaDataGrid("R");
+                    x = polartoCartesiano(Integer.parseInt(edtAngulo.getText().toString()), Integer.parseInt(edtRaio.getText().toString()),"X");
                 }else{
                     raio = Float.parseFloat(String.valueOf(obterRaio(obterCoordenadaDataGrid("X"),obterCoordenadaDataGrid("Y"))));
+                    x = obterCoordenadaCentro("X");
                 }
 
                 if(!edtAngulo.getText().toString().isEmpty()){
                     angulo = obterCoordenadaDataGrid("A");
+                    y = polartoCartesiano(Integer.parseInt(edtAngulo.getText().toString()), Integer.parseInt(edtRaio.getText().toString()),"Y");
                 }else{
-                    angulo = obterAngulo(obterCoordenadaDataGrid("X"),obterCoordenadaDataGrid("Y"));
+                    angulo = obterAngulo(obterCoordenadaCentro("X"),obterCoordenadaDataGrid("Y"));
+                    y = obterCoordenadaDataGrid("Y");
                 }
 
 
-                Aviao a = new Aviao(id,obterCoordenadaCentro("X"),
-                        obterCoordenadaCentro("Y"),
+                Aviao a = new Aviao(id, x,
+                        y*(-1),
                         angulo,
                         obterCoordenadaCentro("D"),
                         obterCoordenadaCentro("V"),
@@ -153,8 +157,8 @@ public class MainActivity extends AppCompatActivity
                         desenhoAviao);
 
 
-                adapterCard.itemSet(id, obterCoordenadaDataGrid("X"),
-                        obterCoordenadaDataGrid("Y"),
+                adapterCard.itemSet(id, x,
+                        y,
                         angulo,
                         obterCoordenadaDataGrid("D"),
                         obterCoordenadaDataGrid("V"),
@@ -554,8 +558,10 @@ public class MainActivity extends AppCompatActivity
         for (int position=0; position < list.size(); position++){
             if (list.get(position).getId() == id) {
 
-                y = ((list.get(position).getY()*(-1)) * (y/100f)) * (-1);
-                x = list.get(position).getX() * (x/100f);
+//                y = ((list.get(position).getY()*(-1)) * (y/100f)) * (-1);
+//                x = list.get(position).getX() * (x/100f);
+                y = ((list.get(position).getY()*(-1)) * y) * (-1);
+                x = list.get(position).getX() * x;
 
                 Aviao a = new Aviao(id, Float.parseFloat(x.toString()), Float.parseFloat(y.toString()),
                         Float.parseFloat(String.valueOf(list.get(position).getA())),
@@ -604,6 +610,19 @@ public class MainActivity extends AppCompatActivity
 
             }
         }
+    }
+
+
+    public Float polartoCartesiano(Integer angulo, Integer raio, String eixo){
+        Double calc;
+
+        if(eixo.equals("Y")){
+            calc = Math.cos((angulo / 180d * Math.PI));
+        }else{
+            calc = Math.sin(angulo / 180d * Math.PI);
+        }
+
+        return Float.parseFloat(String.valueOf(calc * raio));
     }
 
 

@@ -34,14 +34,17 @@
                     <TableRow>
 
                         <CheckBox
-                            android:id="@+id/dataGridCk"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dataGridCk"
+                            android:gravity="center"/>
 
                         <TextView
                             android:id="@+id/dataGridId"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
                             android:text="1"
                             android:textSize="14dp"/>
 
@@ -49,8 +52,8 @@
                             android:id="@+id/dataGridX"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
                             android:text="0.0"
                             android:textSize="14dp"/>
 
@@ -58,8 +61,8 @@
                             android:id="@+id/dataGridY"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
                             android:text="0.0"
                             android:textSize="14dp"/>
 
@@ -67,8 +70,8 @@
                             android:id="@+id/dataGridR"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
                             android:text="0.0"
                             android:textSize="14dp"/>
 
@@ -76,8 +79,8 @@
                             android:id="@+id/dataGridA"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
                             android:text="0.0"
                             android:textSize="14dp"/>
 
@@ -85,8 +88,8 @@
                             android:id="@+id/dataGridV"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
                             android:text="0.0"
                             android:textSize="14dp"/>
 
@@ -94,8 +97,8 @@
                             android:id="@+id/dataGridD"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
                             android:text="0.0"
                             android:textSize="14dp"/>
                     </TableRow>
