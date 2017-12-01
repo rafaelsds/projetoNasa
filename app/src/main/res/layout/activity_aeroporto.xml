@@ -432,6 +432,68 @@
                     </LinearLayout>
 
 
+
+                    <LinearLayout
+                        android:id="@+id/linearFiltroDistanciaMinima"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/retangulo">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/search"
+                            android:layout_gravity="center"
+                            android:background="@null"/>
+
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:text="@string/distancia_minima"
+                            android:linksClickable="true"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearDistanciaMinima"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edtDistancia"
+                                android:inputType="numberSigned"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:textSize="25dp"
+                                android:hint="@string/distancia_minima"/>
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnAvioesProximos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/avioes_proximos"/>
+
+                    </LinearLayout>
+
+
+
                     <LinearLayout
                         android:id="@+id/linearRemoverAvioes"
                         android:layout_width="match_parent"

@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private LinearLayout linearFiltroInputs, linearInputs, linearFiltroDataGrid, linearFiltroTranslandar, linearTranslandar;
     private LinearLayout linearFiltroEscalonar, linearEscalonar, linearRemoverAvioes, linearInputsCarteriano, linearInputsPolar;
-    private LinearLayout linearFiltroRotacionar, linearRotacionar;
+    private LinearLayout linearFiltroRotacionar, linearRotacionar, linearDistanciaMinima, linearFiltroDistanciaMinima;
 
     private EditText edtCoordenadaX, edtCoordenadaY, edtRaio, edtAngulo, edtDirecao, edtTranslandarX, edtTranslandarY;
-    private EditText edtEscalonarX, edtEscalonarY, edtVelocidade, edtRotacionarX, edtRotacionarY, edtRotacionarAngulo;
+    private EditText edtEscalonarX, edtEscalonarY, edtVelocidade, edtRotacionarX, edtRotacionarY, edtRotacionarAngulo, edtDistancia;
 
-    private Button btnAdicionar, btnTranslandar, btnEscalonar, btnRotacionar;
+    private Button btnAdicionar, btnTranslandar, btnEscalonar, btnRotacionar, btnAvioesProximos;
     private ImageView desenhoAviao, centro;
     private RelativeLayout aeroporto;
     private AlertDialog alerta;
@@ -103,9 +103,11 @@ public class MainActivity extends AppCompatActivity
         btnTranslandar = (Button)findViewById(R.id.btnTranslandar);
         btnEscalonar = (Button)findViewById(R.id.btnEscalonar);
         btnRotacionar = (Button)findViewById(R.id.btnRotacionar);
+        btnAvioesProximos = (Button)findViewById(R.id.btnAvioesProximos);
         edtRaio = (EditText)findViewById(R.id.edtRaio);
         edtAngulo = (EditText) findViewById(R.id.edtAngulo);
         edtDirecao = (EditText)findViewById(R.id.edtDirecao);
+        edtDistancia = (EditText)findViewById(R.id.edtDistancia);
         linearFiltroInputs = (LinearLayout)findViewById(R.id.linearFiltroInputs);
         linearInputs = (LinearLayout)findViewById(R.id.linearInputs);
         linearFiltroDataGrid = (LinearLayout)findViewById(R.id.linearFiltroDataGrid);
@@ -118,6 +120,8 @@ public class MainActivity extends AppCompatActivity
         linearInputsPolar = (LinearLayout)findViewById(R.id.linearInputsPolar);
         linearFiltroRotacionar = (LinearLayout)findViewById(R.id.linearFiltroRotacionar);
         linearRotacionar = (LinearLayout)findViewById(R.id.linearRotacionar);
+        linearDistanciaMinima = (LinearLayout)findViewById(R.id.linearDistanciaMinima);
+        linearFiltroDistanciaMinima = (LinearLayout)findViewById(R.id.linearFiltroDistanciaMinima);
     }
 
     public void botoes(){
@@ -225,17 +229,17 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        linearFiltroRotacionar.setOnClickListener(new View.OnClickListener() {
+        linearFiltroDistanciaMinima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //Esconde o teclado para não redenrizar o aeroporto
                 HideSoftkeyBoard.hideSoftKeyboard(MainActivity.this);
 
-                if(linearRotacionar.getVisibility() == View.GONE){
-                    linearRotacionar.setVisibility(View.VISIBLE);
+                if(linearDistanciaMinima.getVisibility() == View.GONE){
+                    linearDistanciaMinima.setVisibility(View.VISIBLE);
                 }else{
-                    linearRotacionar.setVisibility(View.GONE);
+                    linearDistanciaMinima.setVisibility(View.GONE);
                 }
             }
         });
@@ -371,6 +375,48 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+
+
+        btnAvioesProximos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean cardChecado=false;
+                for(Aviao a : adapterCard.getList()){
+                    if(a.isChecado()){
+                        cardChecado=true;
+                        if(validaDados(edtDistancia.getText().toString(),"","DISTANCIA")){
+
+                            //Esconde o teclado para não redenrizar o aeroporto
+                            HideSoftkeyBoard.hideSoftKeyboard(MainActivity.this);
+
+                            //Esconde filtros
+                            linearEscalonar.setVisibility(View.GONE);
+
+                            adapterCard.escalonar(Float.parseFloat(edtEscalonarX.getText().toString()),
+                                    Float.parseFloat(edtEscalonarY.getText().toString()),
+                                    a.getId());
+
+                            escalonar(Float.parseFloat(edtEscalonarX.getText().toString()),
+                                    Float.parseFloat(edtEscalonarY.getText().toString()),
+                                    a.getId());
+
+                        }
+                    }
+                }
+
+                if(!cardChecado){
+                    new SweetAlertDialog(MainActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Oops...")
+                            .setContentText("Nenhum aviao selecionado no DataGrid!")
+                            .show();
+                }
+
+            }
+        });
+
+
+
+
         linearRemoverAvioes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -481,7 +527,15 @@ public class MainActivity extends AppCompatActivity
                 edtRotacionarY.setError(getString(R.string.campo_obrigatorio));
                 isValid = false;
             }
+        }else if(operacao.equals("DISTANCIA")){
+            if (x.isEmpty()) {
+                edtDistancia.setError(getString(R.string.campo_obrigatorio));
+                isValid = false;
+            }
+
         }
+
+
 
         return isValid;
     }
@@ -558,10 +612,10 @@ public class MainActivity extends AppCompatActivity
         for (int position=0; position < list.size(); position++){
             if (list.get(position).getId() == id) {
 
-//                y = ((list.get(position).getY()*(-1)) * (y/100f)) * (-1);
-//                x = list.get(position).getX() * (x/100f);
-                y = ((list.get(position).getY()*(-1)) * y) * (-1);
-                x = list.get(position).getX() * x;
+                y = ((list.get(position).getY()*(-1)) * (y/100f)) * (-1);
+                x = list.get(position).getX() * (x/100f);
+//                y = ((list.get(position).getY()*(-1)) * y) * (-1);
+//                x = list.get(position).getX() * x;
 
                 Aviao a = new Aviao(id, Float.parseFloat(x.toString()), Float.parseFloat(y.toString()),
                         Float.parseFloat(String.valueOf(list.get(position).getA())),

@@ -84,10 +84,10 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
     public void escalonar(Float x, Float y, Integer id) {
         for (int position = 0; position < list.size(); position++) {
             if (list.get(position).getId() == id) {
-//                list.get(position).setY(list.get(position).getY() * (y / 100f));
-//                list.get(position).setX(list.get(position).getX() * (x / 100f));
-                list.get(position).setY(list.get(position).getY() * y);
-                list.get(position).setX(list.get(position).getX() * x);
+                list.get(position).setY(list.get(position).getY() * (y / 100f));
+                list.get(position).setX(list.get(position).getX() * (x / 100f));
+//                list.get(position).setY(list.get(position).getY() * y);
+  //              list.get(position).setX(list.get(position).getX() * x);
                 return;
             }
         }

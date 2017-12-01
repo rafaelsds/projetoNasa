@@ -26,4 +26,6 @@
     <string name="remover_aviao">Remover Aviões</string>
     <string name="adicionar_aviao">Adicionar Avião</string>
     <string name="campo_obrigatorio">Campo obrigatório</string>
+    <string name="distancia_minima">Distância Mínima</string>
+    <string name="avioes_proximos">Aviões Próximos</string>
 </resources>
