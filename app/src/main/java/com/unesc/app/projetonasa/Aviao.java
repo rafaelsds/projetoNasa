@@ -22,6 +22,7 @@ public class Aviao  {
         this.d = d;
         this.v = v;
         this.r = r;
+        this.checado = true;
         this.aviao = aviao;
     }
 

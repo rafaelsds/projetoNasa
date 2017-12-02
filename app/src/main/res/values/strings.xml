@@ -28,4 +28,5 @@
     <string name="campo_obrigatorio">Campo obrigatório</string>
     <string name="distancia_minima">Distância Mínima</string>
     <string name="avioes_proximos">Aviões Próximos</string>
+    <string name="proximos_aeroporto">Próximos ao Aeroporto</string>
 </resources>

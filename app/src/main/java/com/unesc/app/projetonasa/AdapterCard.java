@@ -29,6 +29,7 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
         aviao.setV(v);
         aviao.setR(r);
         aviao.setAviao(imgAviao);
+        aviao.setChecado(true);
 
         list.add(aviao);
     }
@@ -54,6 +55,7 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
         myViewHolder.txtD.setText((myObject.getD()).toString());
         myViewHolder.txtV.setText((myObject.getV()).toString());
         myViewHolder.txtR.setText(df.format(myObject.getR()).toString());
+        myViewHolder.ckSelect.setChecked(myObject.isChecado());
 
         if(myObject.isChecado()){
             myViewHolder.ckSelect.setChecked(true);
@@ -84,8 +86,19 @@ public class AdapterCard extends RecyclerView.Adapter<ViewAviao>{
     public void escalonar(Float x, Float y, Integer id) {
         for (int position = 0; position < list.size(); position++) {
             if (list.get(position).getId() == id) {
-                list.get(position).setY(list.get(position).getY() * (y / 100f));
-                list.get(position).setX(list.get(position).getX() * (x / 100f));
+
+                if(list.get(position).getY()>0){
+                    list.get(position).setY(list.get(position).getY() * (y / 100f));
+                }else{
+                    list.get(position).setY((list.get(position).getY()*(-1)) * (y / 100f));
+                }
+
+                if(list.get(position).getX()>0){
+                    list.get(position).setX(list.get(position).getX() * (x / 100f));
+                }else{
+                    list.get(position).setX((list.get(position).getX()*(-1)) * (x / 100f));
+                }
+
 //                list.get(position).setY(list.get(position).getY() * y);
   //              list.get(position).setX(list.get(position).getX() * x);
                 return;
